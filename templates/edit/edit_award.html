@@ -1,0 +1,172 @@
+<!--
+=========================================================
+Material Kit - v2.0.7
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-kit
+Copyright 2020 Creative Tim (https://www.creative-tim.com/)
+
+Coded by Creative Tim
+
+=========================================================
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/static/assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    CONNECTED 
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="/static/assets/css/material-kit.css?v=2.0.7" rel="stylesheet" />
+</head>
+
+<!-- NAVIGATION -->
+<body class="login-page sidebar-collapse">
+    <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+      <div class="container">
+  
+        <div class="navbar-translate">
+          <a class="navbar-brand" href="/">
+            PEOPLE </a>
+        </div>
+  
+        <div class="navbar-translate">
+          <a class="navbar-brand" href="/search">
+            <i class="material-icons">search</i>Search</a>
+        </div>
+  
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+            {% if session.logged_in %}
+            <li class="nav-item">
+              <a class="navbar-brand" href="/my_profile" >
+                My profile
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="navbar-brand" href="/logout" >
+               Logout
+              </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="navbar-brand" href="/register">
+                Register
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="navbar-brand" href="/login">
+               Login
+              </a>
+            </li>
+            {% endif %}
+  
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<!-- CONTENTS -->
+<div class="page-header header-filter" style="background-image: url('/static/assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 ml-auto mr-auto">
+
+
+          <div class="card card-nav-tabs">
+            <h3 class = "text-center title" style = "color: black;">Edit Award</h3>
+
+            {% from "includes/_formhelpers.html" import render_field %}
+            <form class="contact-form" method = "POST" style = "margin: 3%;" >
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" >
+                        <label for="exampleMessage" class="bmd-label-floating"> Award Name </label>
+                        {{ render_field(form.award_name, class_="form-control") }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" >
+                            <label for="exampleMessage" class="bmd-label-floating"> Acquisition Date  </label>
+                            {{ render_field(form.award_acquisition_date, class_="form-control") }}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group" >
+                    <label for="exampleMessage" class="bmd-label-floating"> Description </label>
+                    {{ render_field(form.award_description, class_="form-control") }}
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4 ml-auto mr-auto text-center">
+                    <p><input class="btn btn-primary" type="submit" value="Complete">
+                  </div>
+                </div>
+              </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+<!-- FOOTER -->
+  <footer class="footer footer-default">
+    <div class="container">
+      <nav class="float-left">
+        <ul>
+
+          <li>
+            <a href="/about_connected">
+              About Connected
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <div class="copyright float-right">
+        &copy;
+        <script>
+          document.write(new Date().getFullYear())
+        </script>, made with <i class="material-icons">favorite</i> by
+        <a href="https://github.com/Soomin-Maxwell" target="_blank">Soomin Lee</a> for a better connection.
+      </div>
+    </div>
+  </footer>
+
+  <!--   Core JS Files   -->
+  <script src="/static/assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="/static/assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="/static/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="/static/assets/js/plugins/moment.min.js"></script>
+  <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+  <script src="/static/assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="/static/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <!--  Google Maps Plugin    -->
+  <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+  <script src="/static/assets/js/material-kit.js?v=2.0.7" type="text/javascript"></script>
+  <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
+  <script type="text/javascript">
+    CKEDITOR.replace('editor')
+  </script>
+</body>
+</html>

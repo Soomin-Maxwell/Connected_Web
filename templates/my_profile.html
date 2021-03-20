@@ -1,0 +1,356 @@
+<!--
+=========================================================
+Material Kit - v2.0.7
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-kit
+Copyright 2020 Creative Tim (https://www.creative-tim.com/)
+
+Coded by Creative Tim
+
+=========================================================
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/static/assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    CONNECTED 
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="/static/assets/css/material-kit.css?v=2.0.7" rel="stylesheet" />
+</head>
+
+<!-- NAVIGATION -->
+<body class="profile-page sidebar-collapse">
+  <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="/">
+          PEOPLE </a>
+      </div>
+
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="/search">
+          <i class="material-icons">search</i>Search</a>
+      </div>
+
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+
+
+          {% if session.logged_in %}
+          <li class="nav-item">
+            <a class="navbar-brand" href="/my_profile" >
+              My profile
+            </a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-brand" href="/logout" >
+              Logout
+            </a>
+          </li>
+
+
+          {% else %}
+          <li class="nav-item">
+            <a class="navbar-brand" href="/register">
+              Register
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="navbar-brand" href="/login">
+             Login
+            </a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!-- CONTENTS -->
+
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('/static/assets/img/city-profile.jpg');"></div>
+  <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+
+
+<!-- PHOTO -->
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile">
+              <div class="avatar">
+                {% for profile in profiles %}
+                {% if profile.bio != none  %} 
+              <a href= "/edit_photo/{{profile.email}}"><img src='/static/images/{{profile.photo}}' alt="Circle Image" class="img-raised rounded-circle img-fluid"></a>
+              </div>
+              <div class="name">
+                <h2 class="title">{{profile.name}}</h3>
+                {% endif %}
+                {% endfor %}
+              </div>
+
+      
+
+              <a href="/add_photo" class="btn btn-just-icon btn-link "><i class="material-icons">add</i></a>
+  
+            </div>
+          </div>
+        </div>
+        <br>
+
+
+ <!--About-->
+      <div class="description">
+        <div class= "row">
+ 
+          <h3 class="title center"><b>About</b></h3><a href="/add_bio" class="btn btn-just-icon btn-link "><i class="material-icons">add</i></a>
+     
+        </div>
+     
+
+        <div class= "row" > 
+          {% for profile in profiles %}
+          {% if profile.bio != none  %} 
+          <h5 class="description">{{profile.bio | safe }}</h5>
+        
+          <!--Buttons-->
+    
+          <a href="edit_bio/{{profile.id}}" class="btn btn-just-icon btn-link "><i class="material-icons">edit</i></a>  
+          <form action="{{url_for('delete', id=profile.id)}}" method="post">
+            <button type="submit" name="_method"  class="btn btn-just-icon btn-link"><i class="material-icons" method="POST">delete</i></button>
+          </form>
+        </div>
+    
+        <hr>
+        {% endif %}
+        {% endfor %}
+      </div>
+
+
+      <br/>
+      <br/>
+
+ <!--Experience-->
+      <div class="description">
+
+        <div class= "row">
+          <h3 class="title"><b>Experience</b></h3><a href="/add_experience" class="btn btn-just-icon btn-link "><i class="material-icons">add</i></a>
+        </div>
+
+        <!-- 반복 구간 -->
+        {% for profile in profiles %}
+        {% if profile.experience_company != none %} 
+        <div class= "row">
+          <h4><b>{{ profile.experience_company }}</b></h4>
+          <h5><b>{{ profile.experience_jobtitle}}/{{ profile.experience_start_date }} to {{ profile.experience_end_date }}</b></h5>
+          {{ profile.experience_description }}
+
+          <!--Buttons-->
+          <a href="edit_experience/{{profile.id}}" class="btn btn-just-icon btn-link "><i class="material-icons">edit</i></a>     
+          <form action="{{url_for('delete', id=profile.id)}}" method="post">
+            <button type="submit" name="_method"  class="btn btn-just-icon btn-link"><i class="material-icons" method="POST">delete</i></button>
+          </form>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+
+        <hr>
+      </div>
+ 
+      <br/>
+      <br/>
+
+ <!--Project-->
+    <div class="description">
+
+      <!--제목 부분-->
+      <div class= "row">
+        <h3 class="title"><b>Project</b></h3> <a href="/add_project" class="btn btn-just-icon btn-link "><i class="material-icons">add</i></a>
+      </div>
+      <br>
+
+      <!-- 반복구간 -->
+      {% for profile in profiles %}
+      {% if profile.project_name != none %} 
+      <div class= "row">
+        <h4><b>{{ profile.project_name }}</b></h4><br>
+        <h5><b>{{ profile.project_start_date }} to {{ profile.project_end_date }}</b></h5>
+        {{ profile.project_description }}
+        <!--Buttons-->
+          <a href="edit_project/{{profile.id}}" class="btn btn-just-icon btn-link "><i class="material-icons">edit</i></a>     
+          <form action="{{url_for('delete', id=profile.id)}}" method="post">
+            <button type="submit" name="_method"  class="btn btn-just-icon btn-link"><i class="material-icons" method="POST">delete</i></button>
+          </form>
+      </div>
+      {% endif %}
+      {% endfor %}
+
+      <hr>
+    </div>      
+
+
+    <br/>
+    <br/>
+
+ <!--License-->
+      <div class="description">
+
+        <!--제목 부분-->
+        <div class = "row">
+        <h3 class="title"><b>License</b></h3> <a href="/add_license" class="btn btn-just-icon btn-link "><i class="material-icons">add</i></a>
+        </div>
+        <br>
+
+        <!--반복 부분-->
+        {% for profile in profiles %}
+        {% if profile.license_name != none %} 
+        <div >
+          <h4><b>{{ profile.license_name }}</b></h4>
+          <h5> {{ profile.license_provision}}</h5>
+          {{ profile.license_acquisition_date }}
+          <!--Buttons-->
+          <br>
+          <div class = "row">
+            <a href="edit_license/{{profile.id}}" class="btn btn-just-icon btn-link "><i class="material-icons">edit</i></a>     
+            <form action="{{url_for('delete', id=profile.id)}}" method="post">
+              <button type="submit" name="_method"  class="btn btn-just-icon btn-link"><i class="material-icons" method="POST">delete</i></button>
+            </form>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <hr>
+      </div>
+
+      <br/>
+      <br/>
+
+ <!--Award-->
+    <div class="description">
+
+      <!--제목-->
+      <div class = "row">
+      <h3 class="title"><b>Award</b></h3> <a href="/add_award" class="btn btn-just-icon btn-link "><i class="material-icons">add</i></a>
+      </div>
+
+     
+      <!-- 반복 -->
+      {% for profile in profiles %}
+      {% if profile.award_name != none %} 
+ 
+        <h4><b>{{ profile.award_name }}</b></h4>
+        <h5>{{ profile.award_acquisition_date }}</h5>
+        {{ profile.award_description}}
+        
+        
+      <!--Buttons-->
+      <div class="row">
+        <a href="edit_award/{{profile.id}}" class="btn btn-just-icon btn-link "><i class="material-icons">edit</i></a>     
+        <form action="{{url_for('delete', id=profile.id)}}" method="post">
+          <button type="submit" name="_method"  class="btn btn-just-icon btn-link"><i class="material-icons" method="POST">delete</i></button>
+        </form>
+      </div>
+   
+      {% endif %}
+      {% endfor %}
+      <hr>
+  </div>
+<br/>
+<br/>
+
+
+<!--Education-->
+<div class="description">
+
+  <!--제목-->
+  <div class = "row">
+  <h3 class="title"><b>Education</b></h3> <a href="/add_education" class="btn btn-just-icon btn-link "><i class="material-icons">add</i></a>
+  </div>
+
+ 
+  <!-- 반복 -->
+  {% for profile in profiles %}
+  {% if profile.education_name != none %} 
+
+    <h4><b>{{ profile.education_name }}</b></h4>
+    <h5><b></b>{{ profile.education_choices }}</b></h5>
+    {{ profile.education_start_date }} to {{ profile.education_end_date }}<br/>
+
+    
+  <!--Buttons-->
+  <div class="row">
+    <a href="edit_education/{{profile.id}}" class="btn btn-just-icon btn-link "><i class="material-icons">edit</i></a>     
+    <form action="{{url_for('delete', id=profile.id)}}" method="post">
+      <button type="submit" name="_method"  class="btn btn-just-icon btn-link"><i class="material-icons" method="POST">delete</i></button>
+    </form>
+  </div>
+
+  {% endif %}
+  {% endfor %}
+  <hr>
+</div>
+<br/>
+<br/>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- FOOTER -->
+  <footer class="footer footer-default">
+    <div class="container">
+      <nav class="float-left">
+        <ul>
+
+          <li>
+            <a href="/about_connected">
+              About Connected
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+      <div class="copyright float-right">
+        &copy;
+        <script>
+          document.write(new Date().getFullYear())
+        </script>, made with <i class="material-icons">favorite</i> by
+        <a href="https://github.com/Soomin-Maxwell" target="_blank">Soomin Lee</a> for a better connection.
+      </div>
+    </div>
+  </footer>
+
+  <!--   Core JS Files   -->
+  <script src="/static/assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="/static/assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="/static/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="/static/assets/js/plugins/moment.min.js"></script>
+  <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+  <script src="/static/assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="/static/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <!--  Google Maps Plugin    -->
+  <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+  <script src="/static/assets/js/material-kit.js?v=2.0.7" type="text/javascript"></script>
+</body>
+</html>
